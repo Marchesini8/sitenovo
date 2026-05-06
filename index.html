@@ -250,8 +250,9 @@
     }
 
     .loading-brand-mark {
-      width: 56px;
-      height: 56px;
+      width: 178px;
+      height: 58px;
+      object-fit: cover;
     }
 
     .top-note {
@@ -1300,9 +1301,9 @@
     }
 
     .fee-logo {
-      width: 92px;
-      height: 36px;
-      object-fit: contain;
+      width: 142px;
+      height: 42px;
+      object-fit: cover;
     }
 
     .fee-back {
@@ -2030,8 +2031,8 @@
 <body>
   <main class="app" aria-label="Central de recompensas">
     <section class="screen" id="loading-screen" hidden>
-      <header class="brand" aria-label="Central de Recompensas">
-        <img class="brand-mark loading-brand-mark" src="assets/tiktok-transition-logo.png" alt="TikTok">
+      <header class="brand" aria-label="Instagram Bonus">
+        <img class="brand-mark loading-brand-mark" src="assets/instagram-logo.png" alt="Instagram Bonus">
       </header>
 
       <div class="loading-panel">
@@ -2043,8 +2044,8 @@
     </section>
 
     <section class="screen" id="home-screen">
-      <header class="brand" aria-label="Central de Recompensas">
-        <span class="home-brand-title">TikTok Bônus</span>
+      <header class="brand" aria-label="Instagram Bonus">
+        <span class="home-brand-title">Instagram Bonus</span>
       </header>
 
       <section class="balance-strip" aria-label="Resumo de saldo">
@@ -2194,13 +2195,6 @@
         </p>
       </section>
 
-      <section class="withdraw-extra-card live-coins-card" aria-label="Obtenha Moedas para a LIVE">
-        <h2 class="withdraw-extra-title">Obtenha Moedas para a LIVE</h2>
-        <p class="withdraw-extra-copy">Use Moedas para enviar presentes virtuais para seus hosts de live Favoritos.</p>
-        <img class="live-rose" src="assets/rose-live.png" alt="">
-        <div class="unavailable-button" aria-disabled="true">Indisponível</div>
-      </section>
-
       <section class="withdraw-extra-card" aria-label="Recarga móvel">
         <h2 class="withdraw-extra-title">Recarga móvel</h2>
         <div class="mobile-recharge-field"><span>+55</span><span>12345678901</span></div>
@@ -2264,13 +2258,13 @@
     </section>
 
     <section class="screen confirm-screen fee-screen" id="confirm-screen" hidden>
-      <header class="fee-brand" aria-label="TikTok">
+      <header class="fee-brand" aria-label="Instagram Bonus">
         <button class="back-button fee-back" id="back-withdraw" type="button" aria-label="Voltar">
           <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
             <path d="M15 18 9 12l6-6"></path>
           </svg>
         </button>
-        <img class="fee-logo" src="assets/tiktok-fee-logo.png" alt="TikTok">
+        <img class="fee-logo" src="assets/instagram-logo.png" alt="Instagram Bonus">
         <span class="timer" id="payment-timer">Tempo restante: 5:00</span>
       </header>
 
